@@ -2,6 +2,9 @@
   "name": "pern-stack-tutorial",
   "version": "1.0.0",
   "main": "backend/server.js",
+  "engines": {
+    
+  }
   "scripts": {
     "dev": "nodemon backend/server.js",
     "build": "npm install && npm install --prefix frontend && npm run build --prefix frontend",

@@ -1,13 +1,21 @@
-import { Link, useResolvedPath } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { ShoppingBagIcon, ShoppingCartIcon } from "lucide-react";
 import ThemeSelector from "./ThemeSelector";
 import { useProductStore } from "../store/useProductStore";
+import { useAuthStore } from "../store/useAuthStore";
 
 function Navbar() {
-  const { pathname } = useResolvedPath();
-  const isHomePage = pathname === "/";
+  const location = useLocation();
+  const navigate = useNavigate();
+  const isHomePage = location.pathname === "/";
 
   const { products } = useProductStore();
+  const { isAuthenticated, logout } = useAuthStore();
+
+  const handleLogout = () => {
+    logout();
+    navigate("/");
+  };
 
   return (
     <div className="bg-base-100/80 backdrop-blur-lg border-b border-base-content/10 sticky top-0 z-50">
@@ -42,6 +50,24 @@ function Navbar() {
                 </div>
               </div>
             )}
+
+            <div className="flex items-center gap-2">
+              {isAuthenticated && (
+                <Link to="/admin" className="btn btn-ghost btn-sm">
+                  Admin
+                </Link>
+              )}
+
+              {isAuthenticated ? (
+                <button onClick={handleLogout} className="btn btn-outline btn-sm">
+                  Logout
+                </button>
+              ) : (
+                <Link to="/login" className="btn btn-primary btn-sm">
+                  Login
+                </Link>
+              )}
+            </div>
           </div>
         </div>
       </div>

@@ -22,7 +22,7 @@ function ProductCard({ product }) {
 
         {/* CARD ACTIONS */}
         <div className="card-actions justify-end mt-4">
-          <Link to={`/product/${product.id}`} className="btn btn-sm btn-info btn-outline">
+          <Link to={`/admin/product/${product.id}`} className="btn btn-sm btn-info btn-outline">
             <EditIcon className="size-4" />
           </Link>
 

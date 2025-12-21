@@ -89,23 +89,3 @@ initDB().then(() => {
     console.log("Server is running on port " + PORT);
   });
 });
-
-
-
-// import { sql } from "../config/db.js";
-
-// export async function seedProducts() {
-//   try {
-//     await sql`
-//       INSERT INTO products (name, image, price)
-//       VALUES
-//         ('Apple', 'apple.jpg', 12000),
-//         ('Banana', 'banana.jpg', 9000),
-//         ('Orange', 'orange.jpg', 15000)
-//     `;
-
-//     console.log("Data seeded ✅");
-//   } catch (err) {
-//     console.error("Seed error ❌", err);
-//   }
-// }
