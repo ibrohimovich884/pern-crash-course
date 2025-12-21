@@ -9,7 +9,6 @@ import productRoutes from "./routes/productRoutes.js";
 import bannerRoutes from "./routes/bannerRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
 import { sql } from "./config/db.js";
-import { aj } from "./lib/arcjet.js";
 import bcrypt from "bcryptjs";
 
 dotenv.config();
@@ -27,7 +26,6 @@ app.use(
 ); // helmet is a security middleware that helps you protect your app by setting various HTTP headers
 app.use(morgan("dev")); // log the requests
 
-// apply arcjet rate-limit to all routes
 app.use(async (req, res, next) => {
   try {
     const decision = await aj.protect(req, {
