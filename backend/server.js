@@ -14,7 +14,7 @@ import bcrypt from "bcryptjs";
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 10000; // Render uchun 10000 port yaxshi
+const PORT = process.env.PORT || 3000; 
 const __dirname = path.resolve();
 
 app.use(express.json());

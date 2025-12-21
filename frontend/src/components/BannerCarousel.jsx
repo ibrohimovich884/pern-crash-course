@@ -12,14 +12,15 @@ function BannerCarousel() {
   }, [fetchBanners]);
 
   useEffect(() => {
-    if (banners.length > 1) {
+
+    if (banners?.length > 1) {
       const interval = setInterval(() => {
         setCurrentIndex((prev) => (prev + 1) % banners.length);
-      }, 5000); // Auto-slide every 5 seconds
+      }, 5000);
 
       return () => clearInterval(interval);
     }
-  }, [banners.length]);
+  }, [banners?.length]);
 
   if (!banners || banners.length === 0) {
     return null;
@@ -34,6 +35,8 @@ function BannerCarousel() {
   };
 
   const currentBanner = banners[currentIndex];
+
+  if (!currentBanner) return null;
 
   return (
     <div className="relative w-full mb-8 rounded-lg overflow-hidden shadow-xl">
@@ -92,9 +95,8 @@ function BannerCarousel() {
               <button
                 key={index}
                 onClick={() => setCurrentIndex(index)}
-                className={`w-2 h-2 rounded-full transition-all ${
-                  index === currentIndex ? "bg-white w-8" : "bg-white/50 hover:bg-white/75"
-                }`}
+                className={`w-2 h-2 rounded-full transition-all ${index === currentIndex ? "bg-white w-8" : "bg-white/50 hover:bg-white/75"
+                  }`}
                 aria-label={`Go to banner ${index + 1}`}
               />
             ))}
