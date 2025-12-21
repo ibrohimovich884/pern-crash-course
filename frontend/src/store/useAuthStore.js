@@ -3,10 +3,10 @@ import axios from "axios";
 import toast from "react-hot-toast";
 
 const AUTH_KEY = "posgrestore-auth-token";
-const BASE_URL = import.meta.env.MODE === "development" ? "http://localhost:3000" : "";
-
+const BASE_URL = import.meta.env.VITE_API_URL;
 export const useAuthStore = create((set, get) => {
   // Check if token exists and is valid
+
   const token = localStorage.getItem(AUTH_KEY);
   const isAuthenticated = !!token;
 

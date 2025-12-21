@@ -22,18 +22,17 @@ function ProductCardClient({ product }) {
             className="absolute top-0 left-0 w-full h-full object-cover"
           />
         </Link>
-        
+
         {/* LIKE BUTTON */}
         <button
           onClick={(e) => {
             e.preventDefault();
             toggleLike(product);
           }}
-          className={`absolute top-3 right-3 btn btn-circle btn-sm z-20 ${
-            liked
+          className={`absolute top-3 right-3 btn btn-circle btn-sm z-20 ${liked
               ? "btn-error bg-red-500 hover:bg-red-600"
               : "btn-ghost bg-base-100/80 hover:bg-base-100"
-          }`}
+            }`}
           aria-label={liked ? "Yoqtirganlar ro'yxatidan olib tashlash" : "Yoqtirganlar ro'yxatiga qo'shish"}
         >
           <Heart className={`size-5 ${liked ? "fill-current" : ""}`} />
@@ -48,16 +47,15 @@ function ProductCardClient({ product }) {
           </h2>
         </Link>
         <p className="text-2xl font-bold text-primary">
-          ${Number(product.price).toFixed(2)}
+          {Number(product.price).toLocaleString("ru-RU")} so'm
         </p>
 
         {/* CARD ACTIONS */}
         <div className="card-actions justify-end mt-4">
           <button
             onClick={() => addToCart(product)}
-            className={`btn btn-primary btn-sm ${
-              inCart ? "btn-outline" : ""
-            }`}
+            className={`btn btn-primary btn-sm ${inCart ? "btn-outline" : ""
+              }`}
           >
             <ShoppingCart className="size-4 mr-2" />
             {inCart ? "Savatda" : "Savatga"}

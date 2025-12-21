@@ -6,19 +6,26 @@ dotenv.config();
 const { Pool } = pkg;
 
 const pool = new Pool({
-  host: process.env.PGHOST || "localhost",
+  host: process.env.PGHOST,
   port: process.env.PGPORT || 5432,
-  database: process.env.PGDATABASE || "mydb",
-  user: process.env.PGUSER || "postgres",
-  password: process.env.PGPASSWORD || "1234",
+  database: process.env.PGDATABASE,
+  user: process.env.PGUSER,
+  password: process.env.PGPASSWORD,
+  // SSL qismi Neon uchun majburiy:
+  ssl: {
+    rejectUnauthorized: false, 
+  },
 });
 
 /**
  * Neon'dagi `sql` ga o‘xshash API
  */
 pool.query("SELECT 1")
-  .then(() => console.log("Postgres ulanish OK ✅"))
-  .catch(err => console.error("Postgres ulanish XATO ❌", err));
+  .then(() => console.log("Postgres ulanish OK"))
+  .catch(err => {
+    console.error("Postgres ulanish XATO");
+    console.error(err.message);
+  });
 
 export const sql = async (strings, ...values) => {
   const text = strings.reduce(
@@ -28,7 +35,6 @@ export const sql = async (strings, ...values) => {
 
   const result = await pool.query(text, values);
   return result.rows;
-  
 };
 
 export { pool };
