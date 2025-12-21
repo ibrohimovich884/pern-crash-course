@@ -3,6 +3,7 @@ import { ShoppingBagIcon, ShoppingCartIcon } from "lucide-react";
 import ThemeSelector from "./ThemeSelector";
 import { useProductStore } from "../store/useProductStore";
 import { useAuthStore } from "../store/useAuthStore";
+import { useCartStore } from "../store/useCartStore";
 
 function Navbar() {
   const location = useLocation();
@@ -11,6 +12,7 @@ function Navbar() {
 
   const { products } = useProductStore();
   const { isAuthenticated, logout } = useAuthStore();
+  const { itemCount } = useCartStore();
 
   const handleLogout = () => {
     logout();
@@ -50,6 +52,18 @@ function Navbar() {
                 </div>
               </div>
             )}
+
+            {/* CART ICON */}
+            <Link to="/cart" className="indicator">
+              <button className="btn btn-ghost btn-circle">
+                <ShoppingCartIcon className="size-5" />
+                {itemCount > 0 && (
+                  <span className="badge badge-sm badge-primary indicator-item">
+                    {itemCount}
+                  </span>
+                )}
+              </button>
+            </Link>
 
             <div className="flex items-center gap-2">
               {isAuthenticated && (

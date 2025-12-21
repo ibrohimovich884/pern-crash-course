@@ -2,6 +2,7 @@ import Navbar from "./components/Navbar";
 
 import HomePage from "./pages/HomePage";
 import ProductPage from "./pages/ProductPage";
+import CartPage from "./pages/CartPage";
 import AdminHomePage from "./pages/AdminHomePage";
 import AdminProductPage from "./pages/AdminProductPage";
 import AdminBannersPage from "./pages/AdminBannersPage";
@@ -25,6 +26,7 @@ function App() {
         {/* CLIENT ROUTES */}
         <Route path="/" element={<HomePage />} />
         <Route path="/product/:id" element={<ProductPage />} />
+        <Route path="/cart" element={<CartPage />} />
 
         {/* AUTH */}
         <Route path="/login" element={<LoginPage />} />

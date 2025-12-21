@@ -1,11 +1,15 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useProductStore } from "../store/useProductStore";
+import { useCartStore } from "../store/useCartStore";
+import { useLikesStore } from "../store/useLikesStore";
 import { useEffect } from "react";
-import { ArrowLeftIcon } from "lucide-react";
+import { ArrowLeftIcon, ShoppingCart, Heart } from "lucide-react";
 import ImageWithLoader from "../components/ImageWithLoader";
 
 function ProductPage() {
   const { currentProduct, loading, error, fetchProduct } = useProductStore();
+  const { addToCart, isInCart } = useCartStore();
+  const { toggleLike, isLiked } = useLikesStore();
   const navigate = useNavigate();
   const { id } = useParams();
 
@@ -61,14 +65,39 @@ function ProductPage() {
         {/* PRODUCT DETAILS */}
         <div className="card bg-base-100 shadow-lg">
           <div className="card-body space-y-4">
-            <h2 className="card-title text-3xl font-bold">{currentProduct.name}</h2>
+            <div className="flex justify-between items-start">
+              <h2 className="card-title text-3xl font-bold">{currentProduct.name}</h2>
+              <button
+                onClick={() => toggleLike(currentProduct)}
+                className={`btn btn-circle btn-sm ${
+                  isLiked(currentProduct.id)
+                    ? "btn-error"
+                    : "btn-ghost"
+                }`}
+                aria-label={isLiked(currentProduct.id) ? "Yoqtirganlar ro'yxatidan olib tashlash" : "Yoqtirganlar ro'yxatiga qo'shish"}
+              >
+                <Heart className={`size-5 ${isLiked(currentProduct.id) ? "fill-current" : ""}`} />
+              </button>
+            </div>
             <p className="text-3xl font-extrabold text-primary">
               ${Number(currentProduct.price).toFixed(2)}
             </p>
             <p className="text-base-content/70">
-              This is a sample product detail page. Later you can add description, reviews or
-              purchase actions here.
+              Bu mahsulot haqida batafsil ma'lumot. Keyinchalik bu yerga tavsif, sharhlar va boshqa ma'lumotlar qo'shiladi.
             </p>
+            
+            {/* ACTION BUTTONS */}
+            <div className="card-actions pt-4">
+              <button
+                onClick={() => addToCart(currentProduct)}
+                className={`btn btn-primary btn-lg flex-1 ${
+                  isInCart(currentProduct.id) ? "btn-outline" : ""
+                }`}
+              >
+                <ShoppingCart className="size-5 mr-2" />
+                {isInCart(currentProduct.id) ? "Savatda" : "Savatga qo'shish"}
+              </button>
+            </div>
           </div>
         </div>
       </div>
