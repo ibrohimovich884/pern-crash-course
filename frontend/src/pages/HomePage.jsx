@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useProductStore } from "../store/useProductStore";
 import { PackageIcon } from "lucide-react";
+import BannerCarousel from "../components/BannerCarousel";
 
 function HomePage() {
   const { products, loading, error, fetchProducts } = useProductStore();
@@ -12,6 +13,8 @@ function HomePage() {
 
   return (
     <main className="max-w-6xl mx-auto px-4 py-8 ">
+      <BannerCarousel />
+      
       <div className="flex flex-col gap-2 mb-8">
         <h1 className="text-3xl font-bold tracking-tight">Welcome to PosgreStore</h1>
         <p className="text-base-content/70">

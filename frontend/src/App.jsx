@@ -4,6 +4,8 @@ import HomePage from "./pages/HomePage";
 import ProductPage from "./pages/ProductPage";
 import AdminHomePage from "./pages/AdminHomePage";
 import AdminProductPage from "./pages/AdminProductPage";
+import AdminBannersPage from "./pages/AdminBannersPage";
+import AdminBannerPage from "./pages/AdminBannerPage";
 import LoginPage from "./pages/LoginPage";
 
 import { Routes, Route } from "react-router-dom";
@@ -41,6 +43,22 @@ function App() {
           element={
             <ProtectedRoute>
               <AdminProductPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/banners"
+          element={
+            <ProtectedRoute>
+              <AdminBannersPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/banner/:id"
+          element={
+            <ProtectedRoute>
+              <AdminBannerPage />
             </ProtectedRoute>
           }
         />

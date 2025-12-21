@@ -6,6 +6,7 @@ import dotenv from "dotenv";
 import path from "path";
 
 import productRoutes from "./routes/productRoutes.js";
+import bannerRoutes from "./routes/bannerRoutes.js";
 import { sql } from "./config/db.js";
 import { aj } from "./lib/arcjet.js";
 
@@ -56,6 +57,7 @@ app.use(async (req, res, next) => {
 });
 
 app.use("/api/products", productRoutes);
+app.use("/api/banners", bannerRoutes);
 
 if (process.env.NODE_ENV === "production") {
   // server our react app
@@ -74,6 +76,17 @@ async function initDB() {
         name VARCHAR(255) NOT NULL,
         image VARCHAR(255) NOT NULL,
         price DECIMAL(10, 2) NOT NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      )
+    `;
+
+    await sql`
+      CREATE TABLE IF NOT EXISTS banners (
+        id SERIAL PRIMARY KEY,
+        title VARCHAR(255) NOT NULL,
+        image VARCHAR(255) NOT NULL,
+        link VARCHAR(500),
+        is_active BOOLEAN DEFAULT true,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       )
     `;
