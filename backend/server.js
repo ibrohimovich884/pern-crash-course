@@ -7,8 +7,10 @@ import path from "path";
 
 import productRoutes from "./routes/productRoutes.js";
 import bannerRoutes from "./routes/bannerRoutes.js";
+import authRoutes from "./routes/authRoutes.js";
 import { sql } from "./config/db.js";
 import { aj } from "./lib/arcjet.js";
+import bcrypt from "bcryptjs";
 
 dotenv.config();
 
@@ -56,6 +58,7 @@ app.use(async (req, res, next) => {
   }
 });
 
+app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/banners", bannerRoutes);
 
@@ -90,6 +93,31 @@ async function initDB() {
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       )
     `;
+
+    await sql`
+      CREATE TABLE IF NOT EXISTS admins (
+        id SERIAL PRIMARY KEY,
+        username VARCHAR(255) UNIQUE NOT NULL,
+        password_hash VARCHAR(255) NOT NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      )
+    `;
+
+    // Create default admin if not exists (username: admin, password: admin123)
+    const existingAdmins = await sql`SELECT * FROM admins WHERE username = 'admin'`;
+    
+    if (existingAdmins.length === 0) {
+      const saltRounds = 10;
+      const defaultPassword = await bcrypt.hash("admin123", saltRounds);
+      
+      await sql`
+        INSERT INTO admins (username, password_hash)
+        VALUES ('admin', ${defaultPassword})
+      `;
+      
+      console.log("Default admin created: username=admin, password=admin123");
+    }
 
     console.log("Database initialized successfully");
   } catch (error) {

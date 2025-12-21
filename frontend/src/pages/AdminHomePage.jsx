@@ -1,9 +1,10 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useProductStore } from "../store/useProductStore";
-import { PackageIcon, PlusCircleIcon, RefreshCwIcon } from "lucide-react";
+import { PackageIcon, PlusCircleIcon, RefreshCwIcon, KeyIcon } from "lucide-react";
 import ProductCard from "../components/ProductCard";
 import AddProductModal from "../components/AddProductModal";
+import ChangePasswordModal from "../components/ChangePasswordModal";
 
 function AdminHomePage() {
   const { products, loading, error, fetchProducts } = useProductStore();
@@ -17,6 +18,13 @@ function AdminHomePage() {
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-2xl font-semibold">Admin – Products</h1>
         <div className="flex items-center gap-3">
+          <button
+            className="btn btn-outline"
+            onClick={() => document.getElementById("change_password_modal").showModal()}
+          >
+            <KeyIcon className="size-5 mr-2" />
+            Parolni o'zgartirish
+          </button>
           <Link to="/admin/banners" className="btn btn-outline">
             Manage Banners
           </Link>
@@ -34,6 +42,7 @@ function AdminHomePage() {
       </div>
 
       <AddProductModal />
+      <ChangePasswordModal />
 
       {error && <div className="alert alert-error mb-8">{error}</div>}
 
