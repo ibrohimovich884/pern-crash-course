@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useProductStore } from "../store/useProductStore";
 import { PackageIcon } from "lucide-react";
 import BannerCarousel from "../components/BannerCarousel";
+import ImageWithLoader from "../components/ImageWithLoader";
 
 function HomePage() {
   const { products, loading, error, fetchProducts } = useProductStore();
@@ -51,7 +52,7 @@ function HomePage() {
               className="card bg-base-100 shadow-xl hover:shadow-2xl transition-shadow duration-300"
             >
               <figure className="relative pt-[56.25%]">
-                <img
+                <ImageWithLoader
                   src={product.image}
                   alt={product.name}
                   className="absolute top-0 left-0 w-full h-full object-cover"

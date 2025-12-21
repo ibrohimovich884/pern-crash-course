@@ -2,6 +2,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useProductStore } from "../store/useProductStore";
 import { useEffect } from "react";
 import { ArrowLeftIcon } from "lucide-react";
+import ImageWithLoader from "../components/ImageWithLoader";
 
 function ProductPage() {
   const { currentProduct, loading, error, fetchProduct } = useProductStore();
@@ -49,11 +50,11 @@ function ProductPage() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* PRODUCT IMAGE */}
-        <div className="rounded-lg overflow-hidden shadow-lg bg-base-100">
-          <img
+        <div className="rounded-lg overflow-hidden shadow-lg bg-base-100 relative h-96">
+          <ImageWithLoader
             src={currentProduct.image}
             alt={currentProduct.name}
-            className="size-full object-cover"
+            className="w-full h-full object-cover"
           />
         </div>
 

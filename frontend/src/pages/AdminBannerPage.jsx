@@ -2,6 +2,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useBannerStore } from "../store/useBannerStore";
 import { useEffect } from "react";
 import { ArrowLeftIcon, SaveIcon, Trash2Icon } from "lucide-react";
+import ImageWithLoader from "../components/ImageWithLoader";
 
 function AdminBannerPage() {
   const {
@@ -53,11 +54,11 @@ function AdminBannerPage() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* BANNER IMAGE */}
-        <div className="rounded-lg overflow-hidden shadow-lg bg-base-100">
-          <img
+        <div className="rounded-lg overflow-hidden shadow-lg bg-base-100 relative h-96">
+          <ImageWithLoader
             src={currentBanner?.image}
             alt={currentBanner?.title}
-            className="size-full object-cover"
+            className="w-full h-full object-cover"
           />
         </div>
 

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useBannerStore } from "../store/useBannerStore";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import LazyImage from "./LazyImage";
 
 function BannerCarousel() {
   const { banners, fetchBanners } = useBannerStore();
@@ -39,17 +40,21 @@ function BannerCarousel() {
       <div className="relative h-64 md:h-96 bg-base-100">
         {currentBanner.link ? (
           <a href={currentBanner.link} target="_blank" rel="noopener noreferrer" className="block w-full h-full">
-            <img
+            <LazyImage
+              key={currentBanner.id}
               src={currentBanner.image}
               alt={currentBanner.title}
               className="w-full h-full object-cover"
+              containerClassName="w-full h-full"
             />
           </a>
         ) : (
-          <img
+          <LazyImage
+            key={currentBanner.id}
             src={currentBanner.image}
             alt={currentBanner.title}
             className="w-full h-full object-cover"
+            containerClassName="w-full h-full"
           />
         )}
 

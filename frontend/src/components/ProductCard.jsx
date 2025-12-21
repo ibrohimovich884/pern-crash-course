@@ -1,6 +1,7 @@
 import { EditIcon, Trash2Icon } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useProductStore } from "../store/useProductStore";
+import ImageWithLoader from "./ImageWithLoader";
 
 function ProductCard({ product }) {
   const { deleteProduct } = useProductStore();
@@ -8,7 +9,7 @@ function ProductCard({ product }) {
     <div className="card bg-base-100 shadow-xl hover:shadow-2xl transition-shadow duration-300">
       {/* PRODUCT IMAGE */}
       <figure className="relative pt-[56.25%]">
-        <img
+        <ImageWithLoader
           src={product.image}
           alt={product.name}
           className="absolute top-0 left-0 w-full h-full object-cover"

@@ -1,6 +1,7 @@
 import { EditIcon, Trash2Icon } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useBannerStore } from "../store/useBannerStore";
+import ImageWithLoader from "./ImageWithLoader";
 
 function BannerCard({ banner }) {
   const { deleteBanner } = useBannerStore();
@@ -8,13 +9,13 @@ function BannerCard({ banner }) {
     <div className="card bg-base-100 shadow-xl hover:shadow-2xl transition-shadow duration-300">
       {/* BANNER IMAGE */}
       <figure className="relative pt-[56.25%]">
-        <img
+        <ImageWithLoader
           src={banner.image}
           alt={banner.title}
           className="absolute top-0 left-0 w-full h-full object-cover"
         />
         {!banner.is_active && (
-          <div className="absolute top-2 right-2 badge badge-error">Inactive</div>
+          <div className="absolute top-2 right-2 badge badge-error z-30">Inactive</div>
         )}
       </figure>
 
