@@ -1,18 +1,18 @@
 import { Link } from "react-router-dom";
-import { Heart, ShoppingCart, Package, Info } from "lucide-react";
+import { Heart, ShoppingCart, Package, Trash2 } from "lucide-react"; // Trash2 ikonkasini qo'shdik
 import ImageWithLoader from "./ImageWithLoader";
 import { useCartStore } from "../store/useCartStore";
 import { useLikesStore } from "../store/useLikesStore";
 
 function ProductCardClient({ product }) {
-  const { addToCart, isInCart } = useCartStore();
+  // removeFromCart funksiyasini store'dan olamiz
+  const { addToCart, removeFromCart, isInCart } = useCartStore();
   const { toggleLike, isLiked } = useLikesStore();
 
   const productId = product.id || product._id;
   const liked = isLiked(productId);
   const inCart = isInCart(productId);
   
-  // Mahsulot omborda bormi?
   const isOutOfStock = product.stock <= 0;
 
   return (
@@ -28,13 +28,11 @@ function ProductCardClient({ product }) {
           />
         </Link>
 
-        {/* STOCK STATUS BADGE */}
         <div className={`absolute bottom-2 left-2 badge ${isOutOfStock ? "badge-error" : "badge-success"} gap-1 shadow-md z-10`}>
           <Package className="size-3" />
           {isOutOfStock ? "Tugagan" : `${product.stock} ta bor`}
         </div>
 
-        {/* LIKE BUTTON */}
         <button
           onClick={(e) => {
             e.preventDefault();
@@ -58,7 +56,6 @@ function ProductCardClient({ product }) {
           </h2>
         </Link>
         
-        {/* DESCRIPTION - Qisqa tavsif */}
         <p className="text-sm text-base-content/60 line-clamp-2 min-h-[40px] mb-2 leading-tight">
           {product.description || "Mahsulot haqida batafsil ma'lumot olish uchun bosing."}
         </p>
@@ -70,17 +67,32 @@ function ProductCardClient({ product }) {
           </p>
         </div>
 
-        {/* CARD ACTIONS */}
-        <div className="card-actions justify-end mt-3 pt-3 border-t border-base-200">
+        {/* CARD ACTIONS - SAVATGA QO'SHISH VA O'CHIRISH */}
+        <div className="card-actions justify-end mt-3 pt-3 border-t border-base-200 gap-2">
+          {/* Agar savatda bo'lsa, O'CHIRISH tugmasi chiqadi */}
+          {inCart && (
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                removeFromCart(productId); // Store'dagi o'chirish funksiyasi
+              }}
+              className="btn btn-sm sm:btn-md btn-error btn-outline"
+              title="Savatdan olib tashlash"
+            >
+              <Trash2 className="size-4" />
+            </button>
+          )}
+
+          {/* ASOSIY TUGMA (Savatga / Savatda / Tugagan) */}
           <button
             onClick={(e) => {
               e.preventDefault();
-              addToCart(product);
+              if (!inCart) addToCart(product);
             }}
-            disabled={isOutOfStock} // Agar tugagan bo'lsa, bosib bo'lmaydi
+            disabled={isOutOfStock}
             className={`btn btn-sm sm:btn-md flex-1 gap-2 ${
               inCart 
-                ? "btn-success btn-outline" 
+                ? "btn-success no-animation cursor-default" 
                 : isOutOfStock 
                 ? "btn-disabled bg-base-300" 
                 : "btn-primary shadow-md hover:shadow-lg"

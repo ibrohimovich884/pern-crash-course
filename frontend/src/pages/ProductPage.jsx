@@ -58,7 +58,7 @@ function ProductPage() {
         </button>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-0 sm:gap-12 bg-base-100 sm:rounded-3xl overflow-hidden shadow-2xl border border-base-200">
-          
+
           {/* PRODUCT IMAGE SECTION */}
           <div className="relative group bg-base-200 flex items-center justify-center">
             <div className="aspect-square w-full overflow-hidden h-full max-h-[600px]">
@@ -68,13 +68,12 @@ function ProductPage() {
                 className={`w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 ${isOutOfStock ? "grayscale opacity-80" : ""}`}
               />
             </div>
-            
+
             {/* LIKE BUTTON ON IMAGE (Mobile) */}
             <button
               onClick={() => toggleLike(currentProduct)}
-              className={`absolute top-4 right-4 btn btn-circle shadow-lg sm:hidden z-20 ${
-                isLiked(currentProduct.id) ? "btn-error" : "bg-base-100"
-              }`}
+              className={`absolute top-4 right-4 btn btn-circle shadow-lg sm:hidden z-20 ${isLiked(currentProduct.id) ? "btn-error" : "bg-base-100"
+                }`}
             >
               <Heart className={`size-6 ${isLiked(currentProduct.id) ? "fill-current" : ""}`} />
             </button>
@@ -89,13 +88,12 @@ function ProductPage() {
                 </h1>
                 {/* Category badge (optional) */}
               </div>
-              
+
               {/* DESKTOP LIKE BUTTON */}
               <button
                 onClick={() => toggleLike(currentProduct)}
-                className={`hidden sm:flex btn btn-circle btn-lg shadow-md transition-all active:scale-90 ${
-                  isLiked(currentProduct.id) ? "btn-error text-white" : "btn-ghost border-base-300"
-                }`}
+                className={`hidden sm:flex btn btn-circle btn-lg shadow-md transition-all active:scale-90 ${isLiked(currentProduct.id) ? "btn-error text-white" : "btn-ghost border-base-300"
+                  }`}
               >
                 <Heart className={`size-7 ${isLiked(currentProduct.id) ? "fill-current" : ""}`} />
               </button>
@@ -105,7 +103,7 @@ function ProductPage() {
               <span className="text-4xl sm:text-5xl font-extrabold text-primary">
                 {Number(currentProduct.price).toLocaleString()} <small className="text-lg font-bold">so'm</small>
               </span>
-              
+
               {/* STOCK STATUS */}
               <div className={`flex items-center gap-2 px-3 py-1 rounded-full border ${isOutOfStock ? "border-error text-error bg-error/5" : "border-success text-success bg-success/5"}`}>
                 {isOutOfStock ? <AlertTriangle className="size-4" /> : <CheckCircle2 className="size-4" />}
@@ -134,13 +132,12 @@ function ProductPage() {
                 <button
                   onClick={() => addToCart(currentProduct)}
                   disabled={isOutOfStock}
-                  className={`btn flex-1 btn-lg shadow-xl text-lg font-bold transition-all ${
-                    isInCart(currentProduct.id) 
-                      ? "btn-success text-white" 
-                      : isOutOfStock 
-                      ? "btn-disabled" 
-                      : "btn-primary"
-                  }`}
+                  className={`btn flex-1 btn-lg shadow-xl text-lg font-bold transition-all ${isInCart(currentProduct.id)
+                      ? "btn-success text-white"
+                      : isOutOfStock
+                        ? "btn-disabled"
+                        : "btn-primary"
+                    }`}
                 >
                   <ShoppingCart className="size-6 mr-2" />
                   {isOutOfStock ? "Tugagan" : isInCart(currentProduct.id) ? "Savatda bor" : "Savatga qo'shish"}
@@ -148,7 +145,6 @@ function ProductPage() {
               </div>
             </div>
           </div>
-
         </div>
       </div>
     </div>
