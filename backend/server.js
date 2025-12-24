@@ -8,13 +8,15 @@ import path from "path";
 import productRoutes from "./routes/productRoutes.js";
 import bannerRoutes from "./routes/bannerRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
+import orderRoutes from "./routes/orderRoutes.js";
+
 import { sql } from "./config/db.js";
 import bcrypt from "bcryptjs";
 
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 3000; 
+const PORT = process.env.PORT || 3000;
 const __dirname = path.resolve();
 
 app.use(express.json());
@@ -31,6 +33,7 @@ app.use(morgan("dev"));
 app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/banners", bannerRoutes);
+app.use("/api/orders", orderRoutes);
 
 // Bosh sahifa uchun (API ishlashini tekshirishga)
 app.get("/health", (req, res) => {
@@ -48,16 +51,18 @@ if (process.env.NODE_ENV === "production") {
 async function initDB() {
   try {
     // DB ulanishini tekshirish
-    await sql`SELECT 1`; 
-    
+    await sql`SELECT 1`;
+
     await sql`
-      CREATE TABLE IF NOT EXISTS products (
-        id SERIAL PRIMARY KEY,
-        name VARCHAR(255) NOT NULL,
-        image VARCHAR(255) NOT NULL,
-        price DECIMAL(10, 2) NOT NULL,
-        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-      )
+    CREATE TABLE IF NOT EXISTS products (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    image VARCHAR(255) NOT NULL,
+    price DECIMAL(10, 2) NOT NULL,
+    stock INTEGER DEFAULT 0,
+    description TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  )
     `;
 
     await sql`
@@ -80,6 +85,20 @@ async function initDB() {
         updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       )
     `;
+
+    await sql`
+      CREATE TABLE IF NOT EXISTS orders (
+        id SERIAL PRIMARY KEY,
+        user_id INTEGER REFERENCES users(id),
+        items JSONB NOT NULL,
+        total_price DECIMAL(10, 2) NOT NULL,
+        delivery_method VARCHAR(50),
+        phone_number VARCHAR(20),
+        address TEXT,
+        status VARCHAR(20) DEFAULT 'pending',
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+     )
+`;
 
     const existingAdmins = await sql`SELECT * FROM admins WHERE username = 'admin'`;
 
