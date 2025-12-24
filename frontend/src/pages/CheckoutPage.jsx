@@ -4,6 +4,7 @@ import { useCartStore } from "../store/useCartStore";
 import { useAuthStore } from "../store/useAuthStore";
 import { TruckIcon, StoreIcon, MapPinIcon, PhoneIcon, CheckCircleIcon } from "lucide-react";
 import toast from "react-hot-toast";
+import axios from "axios";
 
 function CheckoutPage() {
     const { cart, getTotalPrice, clearCart } = useCartStore();

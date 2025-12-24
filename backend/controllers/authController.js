@@ -44,11 +44,16 @@ export const login = async (req, res) => {
 
 		// 4. JWT Token yaratish
 		const token = jwt.sign(
-			{ id: user.id, isAdmin: user.is_admin },
+			{
+				id: user.id,
+				email: user.email,
+				// user.is_admin true bo'lsa 'admin', aks holda 'user'
+				role: user.is_admin ? 'admin' : 'user'
+			},
 			JWT_SECRET,
 			{ expiresIn: "7d" }
 		);
-
+		
 		res.status(200).json({
 			success: true,
 			data: {
@@ -56,10 +61,11 @@ export const login = async (req, res) => {
 				user: {
 					id: user.id,
 					email: user.email,
-					isAdmin: user.is_admin
+					role: user.is_admin ? 'admin' : 'user'
 				}
 			}
 		});
+
 	} catch (error) {
 		console.error(error);
 		res.status(500).json({ success: false, message: "Serverda xatolik" });

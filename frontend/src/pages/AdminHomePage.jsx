@@ -1,7 +1,14 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useProductStore } from "../store/useProductStore";
-import { PackageIcon, PlusCircleIcon, RefreshCwIcon, KeyIcon, LayoutDashboardIcon } from "lucide-react";
+import { 
+  PackageIcon, 
+  PlusCircleIcon, 
+  RefreshCwIcon, 
+  KeyIcon, 
+  LayoutDashboardIcon, 
+  ClipboardListIcon 
+} from "lucide-react"; // ClipboardListIcon qo'shildi
 import ProductCard from "../components/ProductCard";
 import AddProductModal from "../components/AddProductModal";
 import ChangePasswordModal from "../components/ChangePasswordModal";
@@ -23,31 +30,43 @@ function AdminHomePage() {
           <p className="text-base-content/60 text-sm">Mahsulotlar va inventarizatsiyani boshqarish</p>
         </div>
 
-        {/* ACTION BUTTONS - Mobilda 2 ta ustunli grid bo'ladi */}
-        <div className="grid grid-cols-2 sm:flex items-center gap-2 sm:gap-3">
-          <button
-            className="btn btn-outline btn-sm sm:btn-md flex-1"
-            onClick={() => document.getElementById("change_password_modal").showModal()}
-          >
-            <KeyIcon className="size-4 sm:mr-2" />
-            <span className="hidden sm:inline">Parol</span>
-            <span className="sm:hidden text-[10px]">Parol</span>
-          </button>
+        {/* ACTION BUTTONS */}
+        <div className="grid grid-cols-2 sm:flex sm:flex-wrap items-center gap-2 sm:gap-3">
+          
+          {/* BUYURTMALAR TUGMASI */}
+          <Link to="/admin/orders" className="btn btn-outline btn-info btn-sm sm:btn-md flex items-center gap-2">
+            <ClipboardListIcon className="size-4" />
+            <span className="hidden sm:inline">Buyurtmalar</span>
+            <span className="sm:hidden text-[10px]">Orders</span>
+          </Link>
 
-          <Link to="/admin/banners" className="btn btn-outline btn-sm sm:btn-md flex-1">
-            <LayoutDashboardIcon className="size-4 sm:mr-2" />
+          {/* BANNERS TUGMASI */}
+          <Link to="/admin/banners" className="btn btn-outline btn-sm sm:btn-md flex items-center gap-2">
+            <LayoutDashboardIcon className="size-4" />
             <span className="hidden sm:inline">Banners</span>
             <span className="sm:hidden text-[10px]">Banner</span>
           </Link>
 
+          {/* PAROL TUGMASI */}
           <button
-            className="btn btn-primary btn-sm sm:btn-md col-span-2 sm:col-auto"
-            onClick={() => document.getElementById("add_product_modal").showModal()}
+            className="btn btn-outline btn-sm sm:btn-md flex items-center gap-2"
+            onClick={() => document.getElementById("change_password_modal").showModal()}
           >
-            <PlusCircleIcon className="size-4 sm:mr-2" />
-            Add Product
+            <KeyIcon className="size-4" />
+            <span className="hidden sm:inline">Parol</span>
+            <span className="sm:hidden text-[10px]">Parol</span>
           </button>
 
+          {/* MAHSULOT QO'SHISH */}
+          <button
+            className="btn btn-primary btn-sm sm:btn-md col-span-2 sm:col-auto flex items-center gap-2"
+            onClick={() => document.getElementById("add_product_modal").showModal()}
+          >
+            <PlusCircleIcon className="size-4" />
+            <span>Add Product</span>
+          </button>
+
+          {/* REFRESH */}
           <button 
             className="btn btn-ghost btn-circle btn-sm sm:btn-md hidden sm:flex" 
             onClick={fetchProducts}
@@ -57,6 +76,7 @@ function AdminHomePage() {
         </div>
       </div>
 
+      {/* ... qolgan Modal va Grid qismlari o'zgarishsiz qoladi ... */}
       <AddProductModal />
       <ChangePasswordModal />
 
@@ -67,7 +87,6 @@ function AdminHomePage() {
         </div>
       )}
 
-      {/* EMPTY STATE */}
       {products.length === 0 && !loading && (
         <div className="flex flex-col justify-center items-center h-[50vh] space-y-4 bg-base-200/50 rounded-3xl border-2 border-dashed border-base-content/10">
           <div className="bg-base-100 rounded-full p-8 shadow-inner">
@@ -76,13 +95,12 @@ function AdminHomePage() {
           <div className="text-center space-y-2 px-4">
             <h3 className="text-2xl font-bold">Mahsulotlar mavjud emas</h3>
             <p className="text-base-content/60 max-w-sm">
-              Siz hali birorta ham mahsulot qo'shmagansiz. "Add Product" tugmasini bosib birinchi mahsulotingizni qo'shing.
+              Siz hali birorta ham mahsulot qo'shmagansiz.
             </p>
           </div>
         </div>
       )}
 
-      {/* LOADING & GRID */}
       {loading ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
           {[...Array(6)].map((_, i) => (

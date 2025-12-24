@@ -2,12 +2,13 @@ import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAuthStore } from "../store/useAuthStore";
 import { LockIcon, MailIcon, LogInIcon } from "lucide-react";
+import toast from "react-hot-toast";
 
 function LoginPage() {
 	const { isAuthenticated, login, loading, error } = useAuthStore();
 	const navigate = useNavigate();
 	const location = useLocation();
-	const [email, setEmail] = useState(""); // username emas, email
+	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 
 	useEffect(() => {
