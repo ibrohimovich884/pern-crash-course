@@ -2,6 +2,7 @@
 import express from "express";
 import { authenticateToken, isAdmin } from "../middleware/authMiddleware.js";
 import { createOrder, getAllOrders, updateOrderStatus } from "../controllers/orderController.js";
+import { getMyOrders } from "../controllers/orderController.js";
 
 const router = express.Router();
 
@@ -11,4 +12,5 @@ router.post("/", authenticateToken, createOrder);
 // Admin hamma buyurtmalarni ko'rishi
 router.get("/all", authenticateToken, isAdmin, getAllOrders);
 router.patch("/:id/status", authenticateToken, isAdmin, updateOrderStatus);
+router.get("/my-orders", authenticateToken, getMyOrders);
 export default router;
