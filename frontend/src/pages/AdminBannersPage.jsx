@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useBannerStore } from "../store/useBannerStore";
 import { ImageIcon, PlusCircleIcon, RefreshCwIcon, ArrowLeftIcon } from "lucide-react";
 import BannerCard from "../components/BannerCard";
-import AddBannerModal from "../components/AddBannerModal";
+import AddBannerModal from "../components/bannerComponents/AddBannerModal";
 
 function AdminBannersPage() {
   const { banners, loading, error, fetchAllBanners } = useBannerStore();
