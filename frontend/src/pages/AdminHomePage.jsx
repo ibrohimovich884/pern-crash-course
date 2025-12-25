@@ -9,8 +9,8 @@ import {
   LayoutDashboardIcon, 
   ClipboardListIcon 
 } from "lucide-react"; // ClipboardListIcon qo'shildi
-import ProductCard from "../components/ProductCard";
-import AddProductModal from "../components/AddProductModal";
+import ProductCard from "../components/productComponents/ProductCard";
+import AddProductModal from "../components/productComponents/roductModal";
 import ChangePasswordModal from "../components/ChangePasswordModal";
 
 function AdminHomePage() {
