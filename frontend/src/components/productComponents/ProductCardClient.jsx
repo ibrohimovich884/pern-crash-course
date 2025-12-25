@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 import { Heart, ShoppingCart, Package, Trash2 } from "lucide-react";
-import ImageWithLoader from "./ImageWithLoader";
-import { useCartStore } from "../store/useCartStore";
-import { useLikesStore } from "../store/useLikesStore";
+import ImageWithLoader from "../ImageWithLoader";
+import { useCartStore } from "../../store/useCartStore";
+import { useLikesStore } from "../../store/useLikesStore";
 
 function ProductCardClient({ product }) {
   const { addToCart, removeFromCart, isInCart } = useCartStore();

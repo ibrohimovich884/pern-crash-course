@@ -1,7 +1,7 @@
 import { useEffect, useState, useCallback } from "react";
-import { useBannerStore } from "../store/useBannerStore";
+import { useBannerStore } from "../../store/useBannerStore";
 import { ChevronLeft, ChevronRight, ExternalLink } from "lucide-react";
-import LazyImage from "./LazyImage";
+import LazyImage from "../LazyImage";
 
 function BannerCarousel() {
   const { banners, fetchBanners } = useBannerStore();

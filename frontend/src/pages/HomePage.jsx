@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { useProductStore } from "../store/useProductStore";
 import { PackageIcon, AlertCircleIcon } from "lucide-react"; // Qo'shimcha ikonka
-import BannerCarousel from "../components/BannerCarousel";
-import ProductCardClient from "../components/ProductCardClient";
+import BannerCarousel from "../components/bannerComponents/BannerCarousel";
+import ProductCardClient from "../components/productComponents/ProductCardClient";
 
 function HomePage() {
   // fetchProducts funksiyasini chaqirishda xatolik bo'lmasligi uchun store'dan olamiz

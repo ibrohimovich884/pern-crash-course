@@ -1,7 +1,7 @@
 import { EditIcon, Trash2Icon, Eye, EyeOff } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useBannerStore } from "../store/useBannerStore";
-import ImageWithLoader from "./ImageWithLoader";
+import { useBannerStore } from "../../store/useBannerStore";
+import ImageWithLoader from "../ImageWithLoader";
 
 function BannerCard({ banner }) {
   const { deleteBanner } = useBannerStore();
