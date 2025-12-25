@@ -33,7 +33,7 @@ function CheckoutPage() {
                 address: method === "delivery" ? address : "Pickup",
             };
 
-            const response = await axios.post(`${import.meta.env.VITE_API_URL}/orders`, orderData, {
+            const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/orders`, orderData, {
                 headers: { Authorization: `Bearer ${token}` }
             });
 
