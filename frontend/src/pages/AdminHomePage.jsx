@@ -9,7 +9,7 @@ import {
   LayoutDashboardIcon, 
   ClipboardListIcon 
 } from "lucide-react"; // ClipboardListIcon qo'shildi
-import ProductCard from "../components/productComponents/ProductCard";
+import ProductCard from "../components/productComponents/productCardComponents/ProductCard";
 import AddProductModal from "../components/productComponents/AddProductModal";
 import ChangePasswordModal from "../components/ChangePasswordModal";
 
