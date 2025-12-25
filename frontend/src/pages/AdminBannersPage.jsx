@@ -2,13 +2,13 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useBannerStore } from "../store/useBannerStore";
 import { ImageIcon, PlusCircleIcon, RefreshCwIcon, ArrowLeftIcon } from "lucide-react";
-import BannerCard from "../components/BannerCard";
+import BannerCard from "../components/bannerComponents/BannerCard";
 import AddBannerModal from "../components/bannerComponents/AddBannerModal";
 
 function AdminBannersPage() {
   const { banners, loading, error, fetchAllBanners } = useBannerStore();
 
-  useEffect(() => {
+  useEffect(() => { 
     fetchAllBanners();
   }, [fetchAllBanners]);
 

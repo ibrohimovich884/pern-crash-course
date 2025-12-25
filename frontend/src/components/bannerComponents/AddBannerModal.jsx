@@ -1,5 +1,5 @@
 import { ImageIcon, Link2, PlusCircleIcon, TypeIcon } from "lucide-react";
-import { useBannerStore } from "../store/useBannerStore";
+import { useBannerStore } from "../../store/useBannerStore";
 
 function AddBannerModal() {
   const { addBanner, formData, setFormData, loading } = useBannerStore();

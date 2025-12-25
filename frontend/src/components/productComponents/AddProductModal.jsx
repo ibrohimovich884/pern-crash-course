@@ -1,5 +1,5 @@
 import { DollarSignIcon, ImageIcon, Package2Icon, PlusCircleIcon, AlignLeft, LayersIcon } from "lucide-react";
-import { useProductStore } from "../store/useProductStore";
+import { useProductStore } from "../../store/useProductStore";
 
 function AddProductModal() {
   const { addProduct, formData, setFormData, loading } = useProductStore();

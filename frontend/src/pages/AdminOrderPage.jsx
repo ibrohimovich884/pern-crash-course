@@ -3,7 +3,7 @@ import axios from "axios";
 import { PackageIcon, PhoneIcon, MapPinIcon, ClockIcon, CheckCircle2Icon, XCircleIcon } from "lucide-react";
 import toast from "react-hot-toast";
 
-const BASE_URL = `${import.meta.env.VITE_API_URL}/api/orders`;
+const BASE_URL = "http://localhost:3000/api/orders";
 
 function AdminOrdersPage() {
     const [orders, setOrders] = useState([]);

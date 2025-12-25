@@ -10,7 +10,7 @@ import {
   ClipboardListIcon 
 } from "lucide-react"; // ClipboardListIcon qo'shildi
 import ProductCard from "../components/productComponents/ProductCard";
-import AddProductModal from "../components/productComponents/roductModal";
+import AddProductModal from "../components/productComponents/AddProductModal";
 import ChangePasswordModal from "../components/ChangePasswordModal";
 
 function AdminHomePage() {

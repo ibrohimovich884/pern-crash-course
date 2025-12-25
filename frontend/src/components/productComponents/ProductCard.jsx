@@ -1,7 +1,7 @@
 import { EditIcon, Trash2Icon, Package, AlignLeft } from "lucide-react"; // Yangi ikonlar
 import { Link } from "react-router-dom";
-import { useProductStore } from "../store/useProductStore";
-import ImageWithLoader from "./ImageWithLoader";
+import { useProductStore } from "../../store/useProductStore";
+import ImageWithLoader from "../ImageWithLoader";
 
 function ProductCard({ product }) {
   const { deleteProduct } = useProductStore();
